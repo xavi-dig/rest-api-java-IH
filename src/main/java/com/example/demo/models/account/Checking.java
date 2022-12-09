@@ -2,8 +2,6 @@ package com.example.demo.models.account;
 
 import com.example.demo.models.users.AccountHolders;
 import jakarta.persistence.Entity;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 
@@ -22,8 +20,6 @@ public class Checking extends Account{
 
     public Checking() {
     }
-
-    //Git Repo
 
     public BigDecimal applyPenaltyFee(){
         if (minimumBalance.compareTo(getBalance()) > 0)

@@ -1,6 +1,6 @@
 package com.example.demo.controllers.accounts;
 
-import com.example.demo.repositories.account.StudentCheckingRepository;
+import com.example.demo.services.accounts.StudentCheckingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentCheckingController {
 
     @Autowired
-    StudentCheckingRepository studentCheckingRepository;
+    StudentCheckingService studentCheckingService;
 }
