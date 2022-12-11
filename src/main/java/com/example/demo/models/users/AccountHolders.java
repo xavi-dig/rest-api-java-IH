@@ -25,8 +25,8 @@ public class AccountHolders extends User{
     @OneToMany(mappedBy = "secondaryOwner")
     List<Account> secondaryAccountList = new ArrayList<>();
 
-    public AccountHolders(String name, LocalDate dateOfBirth, Address primaryAddress, String email) {
-        super(name);
+    public AccountHolders(String name, LocalDate dateOfBirth, Address primaryAddress, String email, String password) {
+        super(name, password);
         this.dateOfBirth = dateOfBirth;
         this.primaryAddress = primaryAddress;
         this.email = email;

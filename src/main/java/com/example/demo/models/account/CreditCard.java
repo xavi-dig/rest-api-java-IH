@@ -56,6 +56,10 @@ public class CreditCard extends Account{
         this.interestRate = interestRate;
     }
 
+    public LocalDate getLastInterestApply() {
+        return lastInterestApply;
+    }
+
     public void applyCreditCardInterest() {
         if (Period.between(lastInterestApply, LocalDate.now()).getMonths() > 1) {
             super.setBalance(super.getBalance().add(super.getBalance().multiply(interestRate.divide(BigDecimal.valueOf(12)))
@@ -63,10 +67,6 @@ public class CreditCard extends Account{
             //Actualizamos el lastInterest a fecha actual sin perder los meses
             lastInterestApply=lastInterestApply.plusMonths(Period.between(lastInterestApply, LocalDate.now()).getMonths());
         }
-    }
-
-    public LocalDate getLastInterestApply() {
-        return lastInterestApply;
     }
 
 }

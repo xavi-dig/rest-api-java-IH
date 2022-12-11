@@ -45,13 +45,6 @@ public class Saving extends Account {
 
     }
 
-    public BigDecimal applyPenaltyFee() {
-        if (minimumBalance.compareTo(getBalance()) > 0) {
-            setBalance(getBalance().subtract(getPenaltyFee()));
-        }
-        return getBalance();
-    }
-
     public BigDecimal getInterestRate() {
         return interestRate;
     }
@@ -67,6 +60,10 @@ public class Saving extends Account {
 
     }
 
+    public LocalDate getLastInterestApply() {
+        return lastInterestApply;
+    }
+
     public void applySavingInterest() {
         if (Period.between(lastInterestApply, LocalDate.now()).getYears() > 1) {
             super.setBalance(super.getBalance().add(super.getBalance().multiply(interestRate)
@@ -76,7 +73,10 @@ public class Saving extends Account {
         }
     }
 
-    public LocalDate getLastInterestApply() {
-        return lastInterestApply;
+    public BigDecimal applyPenaltyFee() {
+        if (minimumBalance.compareTo(getBalance()) > 0) {
+            setBalance(getBalance().subtract(getPenaltyFee()));
+        }
+        return getBalance();
     }
 }

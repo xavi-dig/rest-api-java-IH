@@ -1,6 +1,7 @@
 package com.example.demo.services.users;
 
 import com.example.demo.models.DTOS.CreateAccountDTO;
+import com.example.demo.models.Role;
 import com.example.demo.models.account.*;
 import com.example.demo.models.users.AccountHolders;
 import com.example.demo.models.users.ThirdParty;
@@ -9,6 +10,7 @@ import com.example.demo.repositories.user.AccountHoldersRepository;
 import com.example.demo.repositories.user.ThirdPartyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -39,6 +41,12 @@ public class AdminService {
 
     @Autowired
     CreditCardRepository creditCardRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    RoleRepository roleRepository;
 
 
     public Account createCheckingOrStudentChecking(CreateAccountDTO createAccountDTO){
@@ -110,5 +118,15 @@ public class AdminService {
 
     public ThirdParty createThirdPartyUser(ThirdParty thirdParty) {
         return thirdPartyRepository.save(new ThirdParty(thirdParty.getName(), thirdParty.getHashedKey()));
+    }
+
+    public AccountHolders createAccountHolder(AccountHolders accountHolders) {
+        String encodedPassword = passwordEncoder.encode(accountHolders.getPassword());
+        AccountHolders accountHolders1 = new AccountHolders(accountHolders.getName(),
+                accountHolders.getDateOfBirth(),accountHolders.getPrimaryAddress(),
+                accountHolders.getEmail(), encodedPassword);
+        Role role = roleRepository.save(new Role("USER", accountHolders1));
+        return accountHoldersRepository.save(accountHolders1);
+
     }
 }

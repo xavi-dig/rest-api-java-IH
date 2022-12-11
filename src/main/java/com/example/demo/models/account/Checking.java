@@ -21,19 +21,19 @@ public class Checking extends Account{
     public Checking() {
     }
 
-    public BigDecimal applyPenaltyFee(){
-        if (minimumBalance.compareTo(getBalance()) > 0)
-        {
-            setBalance(getBalance().subtract(getPenaltyFee()));
-        }
-        return getBalance();
-    }
-
     public BigDecimal getMinimumBalance() {
         return minimumBalance;
     }
 
     public BigDecimal getMonthlyMaintenanceFee() {
         return monthlyMaintenanceFee;
+    }
+
+    public BigDecimal applyPenaltyFee(){
+        if (minimumBalance.compareTo(getBalance()) > 0)
+        {
+            setBalance(getBalance().subtract(getPenaltyFee()));
+        }
+        return getBalance();
     }
 }
